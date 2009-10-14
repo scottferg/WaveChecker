@@ -25,8 +25,10 @@ def login(username, password):
 
     try:
         response = urllib2.urlopen(request, data)
-        parseLogin(response)
+        result = parseLogin(response)
         response.close()
+
+        return result
     except HTTPError, error:
         print error
     except URLError, error:
@@ -46,7 +48,7 @@ def parseLogin(response):
         print 'Error occurred while logging in'
     else:
         if auth and wave:
-            readInbox() 
+            return True
 
 def readInbox():
 
@@ -59,8 +61,10 @@ def readInbox():
 
     try:
         response = urllib2.urlopen(request)
-        parseInbox(response)
+        result = parseInbox(response)
         response.close()
+        
+        return result
     except HTTPError, error:
         print error
     except URLError, error:
@@ -79,8 +83,7 @@ def parseInbox(response):
         messages += 1
         unread += int(wavelet)
 
-    print 'Unread: %s' % (unread)
-    print 'Messages: %s' % (messages)
+    return [messages, unread]
 
 if __name__ == '__main__':
     login()

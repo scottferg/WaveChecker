@@ -4,8 +4,16 @@ import gtk
 import gtk.glade
 import gobject
 
+try:
+    import pynotify
+
+    pynotify.init('Wave checker')
+except ImportError:
+    pass
+
 import threading
 import time
+import os
 
 import waveNotifier
 
@@ -25,7 +33,11 @@ class WaveCheckThread(threading.Thread):
             time.sleep(30)
 
     def check(self):
-        waveNotifier.login(self.username, self.password)
+        if waveNotifier.login(self.username, self.password):
+            result = waveNotifier.readInbox()
+
+            uri = 'file://' + os.path.abspath(os.path.curdir) + '/wave_logo.png'
+            pynotify.Notification('Google Wave', 'You have %s unread blips' % (result[1]), uri).show()
 
 class WaveChecker:
     def makeToast(self, total, unread):
