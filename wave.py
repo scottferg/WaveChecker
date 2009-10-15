@@ -24,7 +24,7 @@ class WaveCheckThread(threading.Thread):
         # Check for updates every 10 minutes
         while True:
             self.check()
-            time.sleep(30)
+            time.sleep(600)
 
     def check(self):
         if waveNotifier.login(self.username, self.password):
