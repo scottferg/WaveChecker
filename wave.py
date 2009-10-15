@@ -7,6 +7,11 @@ try:
 except ImportError:
     pass
 
+try:
+    import PySnarl
+except ImportError:
+    pass
+
 import threading
 import time
 import os
@@ -34,7 +39,12 @@ class WaveCheckThread(threading.Thread):
                 uri = 'file://' + os.path.abspath(os.path.curdir) + '/wave_logo.png'
                 pynotify.Notification('Google Wave', 'You have %s unread blips' % (result[1]), uri).show()
             except NameError:
-                print result
+                pass
+            
+            try:
+                PySnarl.snShowMessage('Google Wave', 'You have %s unread blips' % (result[1]), 5, iconPath = '/wave_logo.png')
+            except NameError:
+                pass
 
 class WaveChecker:
     def onLoginClick(self, event):
