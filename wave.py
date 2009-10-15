@@ -42,7 +42,7 @@ class WaveCheckThread(threading.Thread):
                 pass
             
             try:
-                PySnarl.snShowMessage('Google Wave', 'You have %s unread blips' % (result[1]), 5, iconPath = '/wave_logo.png')
+                PySnarl.snShowMessage('Google Wave', 'You have %s unread blips' % (result[1]), 5, iconPath = os.getcwd() + '\wave_logo.png')
             except NameError:
                 print 'Unread blips: %s' % result[1]
 
