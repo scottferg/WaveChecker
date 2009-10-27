@@ -108,7 +108,7 @@ class WaveChecker:
         vertical.Fit(self.frame)
 
         # Create the taskbar icon
-        icon = wx.Icon('wave.png', wx.BITMAP_TYPE_PNG)
+        icon = wx.Icon('wave_logo_taskbar.png', wx.BITMAP_TYPE_PNG)
         self.statusIcon = wx.TaskBarIcon()
         self.statusIcon.SetIcon(icon, 'Wave Checker')
 
